@@ -23,30 +23,27 @@ dim_cons = min(size(Conservation)); % Need to confirm and optimize
 % initial molecular population, there is an upper bound on each species. 
 % In open systems, we need to define the upper bound explicitely for
 % generating a finite CME. For closed system algorithm  will automatically
-% define the upper bopund of each species.
+% define the upper bopund of each species ir.
 
 UB = Species_Upper_Bound(Conservation);
 
-%% Re-indexing : 
-% While using combvec, we have to keep the vectors generated using combvec
-% less exploding. In every iteration, we will generate a set 
+%% Re-indexing : While using combvec, we have to keep the vectors in
+% combvec less exploding. In every iteration, we will generate a set 
 % of column vectors using combvec and then remove some rows which are 
 % not satisfying the conservation laws. If the first vectors are large 
 % enough, then by iteratively removing the rows using conservation, 
-% the newer vectors formed with olde combvec output will be less expoloding. 
+% the newer vectors formed with combvec will be less expoloding. 
 % The following re-indexing will help it.
-
 Independent_Species_Index = Combvec_Optimization_index(Conservation,UB);
 
 Conservation = Conservation(Independent_Species_Index,:);
 UB = UB(Independent_Species_Index);
 %% Initial molecular population for generating a minimal CME
 % In a biochemical system depending upon the initial molecular population,
-% dimension of the system varies. However, we can generate a mimal CME so
-% that each species will take part in at least one of the reaction 
-% using a smaller amount of initial molecular population. 
-% The floowing lines does this job by idetifying the species which are 
-% neccessary for this to happen.
+% dimension of the system varies. Howeverr, we can generate a mimal CME so
+% that each species will take part using a smaller amount of initla
+% molecularr population. The floowing lines does this job by idetifying the
+% species which are neccessary for this to happen.
 
 if minimal_CME ~= 0
     Neccessary_Species = Independent_Species_Index(1:dim_cons);
@@ -60,7 +57,6 @@ if minimal_CME ~= 0
 end
 
 %% All possible combinations of species
-
 S = Combination_Finder(Conservation,UB);
 nstates = size(S,1);
 

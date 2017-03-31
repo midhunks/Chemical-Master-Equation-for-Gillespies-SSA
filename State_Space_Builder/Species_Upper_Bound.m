@@ -1,7 +1,14 @@
-%% Upper bound of molecular population of each species
 function UB = Species_Upper_Bound(Conservation)
+%% Upper bound of molecular population of each species
+    % for a closed system, depending upon the conservation law and 
+    % initial molecular population, there is an upper bound on each species. 
+    % In open systems, we need to define the upper bound explicitely for
+    % generating a finite CME. For closed system algorithm  will automatically
+    % define the upper bopund of each species.
+
 global number_species Boundary_condition Conservation_Sum
-%% Default boundary condition
+
+% Default boundary condition
 if isempty(Boundary_condition)
     Boundary_condition = 10*ones(1,size(Stoichiometry,1));
 end
