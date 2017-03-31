@@ -1,7 +1,9 @@
 %% State space Builder
-function [S,Conservation] = State_Builder(Stoichiometry)
+function [S] = State_Builder(Stoichiometry)
 tic
-global number_species Initial_Molecular_Population
+global number_species number_reactions Initial_Molecular_Population
+[number_species,number_reactions] = size(Stoichiometry);
+
 
 %% Setting conservation Law. 
 % For a closed system there are a number of conservartion laws exists. For
@@ -52,6 +54,8 @@ end
 %% All possible combinations of species
 S = Combination_Finder(Conservation,UB);
 
+global nstates
+nstates = size(S,1);
 %% Error check
 Error_Check
 
@@ -62,11 +66,11 @@ if minimal_CME ~= 0
     Initial_Molecular_Population = Initial_Molecular_Population(Rev_Independent_Species_Index);
 end
 %% Re-ndex back only if needed
-Conservation = Conservation(Rev_Independent_Species_Index,:);
+% Conservation = Conservation(Rev_Independent_Species_Index,:);
 % UB = UB(Rev_Independent_Species_Index);
 
 %%
-fprintf('\nState space generated in %.2f seconds\n\n',toc);
+fprintf('\n%.0f states generated in %.2f seconds\n\n',nstates,toc);
 end
 
 

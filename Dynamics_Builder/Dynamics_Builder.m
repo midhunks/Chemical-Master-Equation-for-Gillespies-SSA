@@ -1,4 +1,4 @@
-function [D] = Dynamics_Builder_new(Stoichiometry,S,Reactants_stoichiometry)
+function [D] = Dynamics_Builder(S, Stoichiometry, Reactants_stoichiometry)
 tic
 global nstates Reaction_rates number_reactions
 
