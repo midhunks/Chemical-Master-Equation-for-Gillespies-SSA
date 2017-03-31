@@ -1,9 +1,9 @@
 %% State space Builder
 function [S] = State_Builder(Stoichiometry)
-tic
-global number_species number_reactions Initial_Molecular_Population
-[number_species,number_reactions] = size(Stoichiometry);
+tic; global number_species number_reactions Initial_Molecular_Population...
+            Conservation_Sum dim_cons nstates minimal_CME
 
+[number_species,number_reactions] = size(Stoichiometry);
 
 %% Setting conservation Law. 
 % For a closed system there are a number of conservartion laws exists. For
@@ -11,7 +11,6 @@ global number_species number_reactions Initial_Molecular_Population
 % possible conservation lwas in both system using the following function
 Conservation = Conservation_Law(Stoichiometry);
 
-global Conservation_Sum dim_cons
 Conservation_Sum = Initial_Molecular_Population*Conservation;
 dim_cons = min(size(Conservation)); % Need to confirm and optimize
 
@@ -20,6 +19,7 @@ dim_cons = min(size(Conservation)); % Need to confirm and optimize
 % a closed system there is an upper bound on each species. In open system
 % we need to define the upper bound. For closed system this function will
 % define the upper bopund of each species.
+
 UB = Species_Upper_Bound(Conservation);
 
 %% Re-indexing : While using combvec, we have to keep the vectors in
@@ -39,7 +39,7 @@ UB = UB(Independent_Species_Index);
 % that each species will take part using a smaller amount of initla
 % molecularr population. The floowing lines does this job by idetifying the
 % species which are neccessary for this to happen.
-global minimal_CME
+
 if minimal_CME ~= 0
     Neccessary_Species = Independent_Species_Index(1:dim_cons);
     fprintf('To Produce a minimal CME use small values for species %d\n',Neccessary_Species);
@@ -53,9 +53,8 @@ end
 
 %% All possible combinations of species
 S = Combination_Finder(Conservation,UB);
-
-global nstates
 nstates = size(S,1);
+
 %% Error check
 Error_Check
 
@@ -65,12 +64,13 @@ S = S(:,Rev_Independent_Species_Index);
 if minimal_CME ~= 0
     Initial_Molecular_Population = Initial_Molecular_Population(Rev_Independent_Species_Index);
 end
+
 %% Re-ndex back only if needed
 % Conservation = Conservation(Rev_Independent_Species_Index,:);
 % UB = UB(Rev_Independent_Species_Index);
 
 %%
-fprintf('\n%.0f states generated in %.2f seconds\n\n',nstates,toc);
+fprintf('\n%.0f states generated in %.2f seconds\n',nstates,toc);
 end
 
 

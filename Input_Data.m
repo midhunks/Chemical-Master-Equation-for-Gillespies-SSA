@@ -1,5 +1,5 @@
-%% Inpute data
-% Please do not touch this global variables. 
+%% Setting global variables.
+% Please do not touch this secton. 
 global minimal_CME Reaction_rates Conservation_temp ...
        Initial_Molecular_Population Boundary_condition
 
@@ -28,7 +28,7 @@ Reactants_stoichiometry = [-1,  0,  0,  0;
 Reaction_rates = [1e6,5e5,5e0,2e0];
 
 %% Initial molecular population
-Initial_Molecular_Population=[2e0 3e0 0 0];
+Initial_Molecular_Population=[2e1 3e1 0 0];
 
 %% Boundary condtion on molecular population of each species for open systems
 % In an open system, there will be species with unbounded population.

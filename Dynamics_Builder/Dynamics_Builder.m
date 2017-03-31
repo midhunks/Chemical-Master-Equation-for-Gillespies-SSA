@@ -1,18 +1,16 @@
 function [D] = Dynamics_Builder(S, Stoichiometry, Reactants_stoichiometry)
-tic
-global nstates Reaction_rates number_reactions
+tic; global nstates Reaction_rates number_reactions
 
 %% Identifying the possible transitions from each state due to all reactions
-tic
+
 State_Transition_Index_Matrix = State_Transition_Matrix_Finder(S,Stoichiometry);
-toc
+
 %% Possible combination of interactions between species in all reactions
 %(parallel pooling is implemented and can be used when number of reeaction is large)
-tic
+
 [Combination, Combination_diag] = Combination_reaction_Finder(S,Reactants_stoichiometry);
-toc
+
 %% Transition Matrix Builder
-tic
 Reaction_propensity = [];
 Reaction_propensity_index = [];
 for i = 1:number_reactions
@@ -37,5 +35,5 @@ Reaction_propensity = [Reaction_propensity;Reaction_propensity_temp'];
 D = sparse(Reaction_propensity_index(1,:),Reaction_propensity_index(2,:),...
     Reaction_propensity,nstates,nstates);
 
-fprintf('\nTransition matrix generated in %.2f seconds\n',toc)
+fprintf('\nDynamics matrix generated in %.2f seconds\n',toc)
 end
