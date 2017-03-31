@@ -1,7 +1,7 @@
-function [D,State_Transition_Matrix,Reaction_propensity]=Dynamics_Builder_new(Stoichiometry,S,Reactants_stoichiometry)
-global nstates Reaction_rate_Function Parm
-% tic
-number_reactions=size(Stoichiometry,2);
+function [D]=Dynamics_Builder_new(Stoichiometry,S,Reactants_stoichiometry)
+tic
+global nstates Reaction_rates number_reactions
+
 % Reaction_Matrix = zeros(number_reactions,nstates);
 State_Transition_Matrix=zeros(number_reactions,nstates);
 for i=1:number_reactions
@@ -11,8 +11,9 @@ for i=1:number_reactions
     %Reaction_Matrix(i,States_in_B_from_Reaction_i_occurs)=i;
     
     [~,Common_States_exists_in_S_and_B]=ismember(B',S,'rows');
-    State_Transition_Matrix(i,:)=Common_States_exists_in_S_and_B;
+    State_Transition_Matrix(i,:)=Common_States_exists_in_S_and_B
 end
+
 clear B Possible_reactions States_from_A
 % fprintf('Reaction & States transition matrix generated in %s seconds\n',toc)
 
@@ -86,7 +87,7 @@ for i=1:number_reactions
     %Transitioned states after reaction i
     Transition_state_index=State_Transition_Matrix(i,State_index);
     S_temp=S(Transition_state_index,:);
-    Rate=Reaction_rate_Function(Parm,S_temp);
+    Rate = Reaction_rate_Function(Reaction_rates,S_temp);
     
     Reaction_propensity_index=cat(2,Reaction_propensity_index,...
         [State_Transition_Matrix(i,State_index);State_index]);
@@ -95,7 +96,7 @@ for i=1:number_reactions
 end
 
 Reaction_propensity_index=[Reaction_propensity_index [1:nstates;1:nstates]];
-Reaction_propensity_temp=-dot(Combination_diag',Reaction_rate_Function(Parm,S)');
+Reaction_propensity_temp=-dot(Combination_diag',Reaction_rate_Function(Reaction_rates,S)');
 Reaction_propensity=[Reaction_propensity;Reaction_propensity_temp'];
 
 % nonzeros_in_D=length(Reaction_propensity);
@@ -133,5 +134,5 @@ D=sparse(Reaction_propensity_index(1,:),Reaction_propensity_index(2,:),...
 %     pause
 % end
 
-
+fprintf('\nTransition matrix generated in %.2f seconds\n',toc)
 end
