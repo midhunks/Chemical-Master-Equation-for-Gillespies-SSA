@@ -11,17 +11,17 @@
 ##### Input Stoichiometry as per the system (demo: Michaelis Menten)
 
 	Stoichiometry = [-1,  1,  0,  0;
-                         -1,  1,  1, -1; 
-                          1, -1, -1,  1;
-                          0,  0,  1, -1];
+                     -1,  1,  1, -1; 
+                      1, -1, -1,  1;
+                      0,  0,  1, -1];
 
 ##### Identify reactants: 
 By setting stoichiometry in terms of reactants In some reactions some species present as reactant and product. For e.g., A + B -> A + C. where A is a reactant and a product. Net gain of A is zero molecules. This will remove A from original Stoichiometry matrix and cannot idnetify the reactants properly which is necassary for computing reaction propensities in CME
 
   	Reactants_stoichiometry = [-1,  0,  0,  0;
-                                   -1,  0,  0, -1;
-                                    0, -1, -1,  0;
-                                    0,  0,  0, -1];
+                               -1,  0,  0, -1;
+                                0, -1, -1,  0;
+                                0,  0,  0, -1];
                       
 ##### Input Reaction rates ( 4 constants for MM mechanism)
   	Reaction_rates = [1e6, 5e5, 5e0, 2e0];
