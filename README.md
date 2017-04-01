@@ -48,4 +48,3 @@ Keep this untouched as long as the conservation law identified from rref has int
 Scale the result so that all columns have integer values.
 
   	Conservation_temp = [];
->>>>>>> origin/master
