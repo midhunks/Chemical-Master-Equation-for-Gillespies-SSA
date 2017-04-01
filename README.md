@@ -24,7 +24,13 @@ By setting stoichiometry in terms of reactants In some reactions some species pr
                                 0,  0,  0, -1];
                       
 ##### Input Reaction rates ( 4 constants for MM mechanism)
-  	Reaction_rates = [1e6, 5e5, 5e0, 2e0];
+	Reaction_rates = [1e6,5e5,5e0,2e0];
+
+The following function will generate an array of 'Reaction_rates'. However, when the 'Reaction_rates' are changing with respect to the current population of species, edit the following function accordingly. Leave it commented if the rates are constants as before.
+
+	% global Rate
+	% Rate = Reaction_rate_Function(Reaction_rates,S);
+  	
 
 ##### Input Initial molecular population (4 species for MM mechanism)
   	Initial_Molecular_Population = [1, 2, 3, 4];
