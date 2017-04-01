@@ -27,8 +27,16 @@ Reactants_stoichiometry = [-1,  0,  0,  0;
 %% Reaction rates (constants)
 Reaction_rates = [1e6,5e5,5e0,2e0];
 
+% The following function will generate an array of 'Reaction_rates'.
+% However, when the 'Reaction_rates' are changing with respect to the
+% current population of species, edit the following function accordingly.
+% Leave it commented if the rates are constants as before.
+
+% global Rate
+% Rate = Reaction_rate_Function(Reaction_rates,S);
+
 %% Initial molecular population
-Initial_Molecular_Population=[2e1 3e1 0 0];
+Initial_Molecular_Population=[2e0 3e0 0 0];
 
 %% Boundary condtion on molecular population of each species for open systems
 % In an open system, there will be species with unbounded population.

@@ -1,6 +1,6 @@
 function [Combination, Combination_diag] = Combination_reaction_Finder(S,Reactants_stoichiometry)
 global nstates number_reactions
-Combination = zeros(number_reactions,nstates);
+Combination = zeros(nstates,number_reactions);
 Combination_diag = zeros(nstates,number_reactions);
 for i = 1:number_reactions %(USE parfor for parallel pooling)
     %ith reaction stoichiometry
@@ -28,6 +28,6 @@ for i = 1:number_reactions %(USE parfor for parallel pooling)
             -gammaln(Reactant_change+1)-gammaln(S_temp-Reactant_change+1)));
     end
     %Possible Combinations of the occurance of reaction i from all states
-    Combination(i,:) = prod(Comb,2);
+    Combination(:,i) = prod(Comb,2);
 end
 end

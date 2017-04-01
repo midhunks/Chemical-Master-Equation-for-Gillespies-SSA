@@ -1,5 +1,7 @@
 function S = Combination_Finder(Conservation,UB)
 %% finding all combinations of linearly independent (n-k) species
+% The function identifies al possible states the system can reach
+% by means of conservation and upper bound.
 global number_species Conservation_Sum
 dim_Cons_Cols=size(Conservation,2);
 

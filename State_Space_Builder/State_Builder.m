@@ -60,7 +60,8 @@ if minimal_CME ~= 0
 end
 
 %% All possible combinations of species
-
+% The following function identifies al possible states the system can reach
+% by means of conservation and upper bound.
 S = Combination_Finder(Conservation,UB);
 nstates = size(S,1);
 
@@ -68,15 +69,15 @@ nstates = size(S,1);
 Error_Check
 
 %% Re-indexing back so that state space S is in the same order as input given.
-[~,Rev_Independent_Species_Index] = sort(Independent_Species_Index,'ascend');
-S = S(:,Rev_Independent_Species_Index);
+[~,Reverse_Index] = sort(Independent_Species_Index,'ascend');
+S = S(:,Reverse_Index);
 if minimal_CME ~= 0
-    Initial_Molecular_Population = Initial_Molecular_Population(Rev_Independent_Species_Index);
+    Initial_Molecular_Population = Initial_Molecular_Population(Reverse_Index);
 end
 
 %% Re-ndex back only if needed
-% Conservation = Conservation(Rev_Independent_Species_Index,:);
-% UB = UB(Rev_Independent_Species_Index);
+% Conservation = Conservation(Reverse_Index,:);
+% UB = UB(Reverse_Index);
 
 %%
 fprintf('\n%.0f states generated in %.2f seconds\n',nstates,toc);
