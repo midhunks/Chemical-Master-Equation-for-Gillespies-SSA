@@ -57,7 +57,7 @@ for k=1:Number_of_Sample_paths
     % Keep data for analysis (seperate different sample paths with NaN)
     Time_Full = cat(1,[Time_Full;nan],Time);
     State_Full = cat(1,[State_Full;nan*ones(1,4)],State);    
-%     fprintf('A sample path generated in %.2f seconds\n',toc)
+    fprintf('A sample path is generated in %.2f seconds\n',toc)
 end
 fprintf('SSA generated %.0f sample paths in %.2f seconds\n',Number_of_Sample_paths,toc)
 

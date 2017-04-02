@@ -12,4 +12,5 @@ S = State_Builder(Stoichiometry);
 
 %% Identify the transition matrix of the CME
 
-[D, State_Transition_Index_Matrix,SSA_propensity_matrix] = Dynamics_Builder(S, Stoichiometry, Reactants_stoichiometry);
+[D, State_Transition_Index_Matrix,SSA_propensity_matrix]...
+        = Dynamics_Builder(S, Stoichiometry, Reactants_stoichiometry);

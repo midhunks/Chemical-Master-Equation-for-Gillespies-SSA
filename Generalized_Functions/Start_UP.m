@@ -21,7 +21,7 @@ set(0,'DefaultAxesTickDir', 'in')
 % colormap(gray);
 % set(0,'DefaultAxesColorOrder',1e-1*[1 1 1;2 2 2;2 2 2;3 3 3;4 4 4;5 5 5]);
 
-set(0,'defaultAxesColorOrder','remove')
+% set(0,'defaultAxesColorOrder','remove')
 
 %%
 fprintf('Initialized (clearing data and closing figures) in %.2f seconds\n\n',toc)
