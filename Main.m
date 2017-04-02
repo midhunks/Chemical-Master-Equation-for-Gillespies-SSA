@@ -1,3 +1,6 @@
+%% Step 0: Clearing variables and setting defaults
+Start_UP
+
 %% Step 1: Add subdirectories to the search path
 if ispc, b='\'; else, b='/'; end % defining forward/bckward slashes
 addpath([pwd,b,'Generalized_Functions',b]);
