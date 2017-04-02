@@ -1,4 +1,4 @@
-%% Identify State space of the CME 
+%% Identify State space of the CME
 S = State_Builder(Stoichiometry);
 
 %% Identify the transition matrix of the CME
