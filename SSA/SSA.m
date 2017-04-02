@@ -1,4 +1,4 @@
-%% Boundary Consitions
+%% Boundary Conditions
 Final_time = 1e2; % add inf if final time is not neccassary for the model
 Number_of_Sample_paths = 2e1; % Number of sample paths to be generated
 
