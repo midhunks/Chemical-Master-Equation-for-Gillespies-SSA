@@ -12,6 +12,6 @@ system('git clone https://github.com/midhunks/Chemical-Master-Equation.git')
 MATLAB syntax to Update: 
 In matlab, go to existing "Chemical-Master-Equation' directory where you want to save it, then use the following syntax to download them
 
-system('git pull https://github.com/midhunks/Chemical-Master-Equation.git')
+`system('git pull https://github.com/midhunks/Chemical-Master-Equation.git')`
 
 
