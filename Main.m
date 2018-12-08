@@ -1,26 +1,29 @@
-%% Step 0: Clearing variables and setting defaults for plots
+%% Clearing Variables
+clc;
+clear;
+% close all;
+more off;
+% profile off; profile viewer;
+% warning off; 
+format shortG; format compact % format longg %rat
 
-Start_UP
-
-%% Step 1: Add subdirectories to the search path
-
-if ispc, b='\'; else, b='/'; end % defining forward/bckward slashes
-addpath([pwd,b,'Generalized_Functions',b]);
-addpath([pwd,b,'Models',b]);
-addpath([pwd,b,'SSA',b]);
-addpath([pwd,b,'CME',b]);
-addpath([pwd,b,'CME',b,'State_Space_Builder',b]);
-addpath([pwd,b,'CME',b,'Dynamics_Builder',b]);
-
-%% Step 2: Generate the biochemical model
+homefolder = 'C:\Users\mkathana\Dropbox\Study\UWaterloo\Brian\MATLAB codes\Chemical-Master-Equation-for-Gillespies-SSA';
+cd(homefolder); 
+%% Step 1: Generate the biochemical model
 % File which describe the Biochemical model
 
-MM
+cd(homefolder);  cd('Models');  
+% run('MM.m')
+run('LinearModel_3Species.m')
+% run('Gene_Toggle.m')
+%% Step 2: Generate the CME
 
-%% Step 3: Generate the CME
-
+cd(homefolder);  cd('CME');
 CME
 
-%% Step 4: Generate sample paths via SSA
+%% Step 3: Generate sample paths via SSA
+
+homefolder = 'C:\Users\mkathana\Dropbox\Study\UWaterloo\Brian\MATLAB codes\Chemical-Master-Equation-for-Gillespies-SSA';
+cd(homefolder); cd('SSA')
 
 SSA
