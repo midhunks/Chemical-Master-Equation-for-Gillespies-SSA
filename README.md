@@ -6,7 +6,7 @@ Direct download link for CME codes: "https://github.com/midhunks/Chemical-Master
 MATLAB syntax to Download: 
 In matlab, go to a directory where you want to save it, then use the following syntax to download them
 
-system('git clone https://github.com/midhunks/Chemical-Master-Equation.git')
+`system('git clone https://github.com/midhunks/Chemical-Master-Equation.git')`
 
 
 MATLAB syntax to Update: 
