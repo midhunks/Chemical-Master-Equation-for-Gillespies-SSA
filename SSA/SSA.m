@@ -1,23 +1,17 @@
 %% Set SSA and CME folder
-if ~exist('SSA_Folder','var')
-    SSA_Folder = uigetdir('','Choose SSA Folder');
-    % OR you can Change the path using the following line
-    % SSA_Folder = '\Chemical-Master-Equation-for-Gillespies-SSA';
-end
+SSA_Folder = uigetdir('','Choose SSA Folder');
+CME_Folder = uigetdir('','Choose CME Folder');
 
-if ~exist('CME_Folder','var')
-    disp('If CME generation codes are not downloaded, then download it from')
-    CME_Folder = uigetdir('','Choose CME Folder');
-    % OR you can Change the path using the following line
-    % CME_Folder = '\Chemical-Master-Equation';
-end
+% OR you can Change the path using the following line
+% SSA_Folder = '\Chemical-Master-Equation-for-Gillespies-SSA';
+% CME_Folder = '\Chemical-Master-Equation';
 
 %% Generate CME:
 % Model templates are available in folder once the CME codes are downloded.
 % Create or Change MATLAB files as needed. You can also modify 'CME' file
 % in the folder to avoid asking model and default folders
 
-cd(SSA_Folder); cd('Chemical-Master-Equation')
+cd(CME_Folder);
 CME
 
 %%
