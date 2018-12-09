@@ -7,7 +7,7 @@ CME_Folder = uigetdir('','Choose CME Folder');
 % CME_Folder = '\Chemical-Master-Equation';
 
 %% Generate CME:
-% Model templates are available in folder once the CME codes are downloded.
+% Model templates are available in 'Models' folder once the CME codes are downloded.
 % Create or Change MATLAB files as needed. You can also modify 'CME' file
 % in the folder to avoid asking model and default folders
 
@@ -15,64 +15,52 @@ cd(CME_Folder);
 CME
 
 %%
-% Propensity_Sum = sum(SSA_propensity_matrix,2);
-% Propensity_Sum_Reciprocal = 1./Propensity_Sum;
-
 Propensity_CDF = cumsum(SSA_propensity_matrix,2);
 Propensity_CDF_Normalized = bsxfun(@rdivide, Propensity_CDF,Propensity_CDF(:,end));
+% Propensity_CDF_Reciprocal = 1./Propensity_Sum;
 
-%% Preallocation
-
-State_Index = [State_Index; State_Index_temp];
-Time = [Time; Time_temp];
-Rand_numbers = [Rand_numbers; rand(n,2)];
-
-global nstates
-n=max(nstates,1e8); % minimum pre-allocation should be equal to number of states
-State_Index_temp = zeros(n,1);      Time_temp = zeros(n,1);
+%% SSA inputs
+Final_time = input('Enter Final time:');
+Number_of_Sample_paths = input('Enter number of sample paths to be generated:');
 
 %% SSA
-TotalTime = 0;    Time_Full = [];     State_Full = [];
+n=1e4; TotalTime = 0;    Time_Full = [];     State_Full = [];
 for k=1:Number_of_Sample_paths
     tic;
-    State_Index = State_Index_temp;
-    Time = Time_temp;
-    Rand_numbers = rand(n,2);
+    State_Index = nan(n,1);    Time = nan(n,1);
     
-    Current_state_index = 1;    i = 1;     t = 0;
-    while ~isempty(Current_state_index) && t <= Final_time
-        %         %% Preallocation updation
-        %         % When 99% preallocation used, then add more area to the dynamics
-        %         if rem(i,round(n*.99))==0
-        %             PreAllocate_SSA
-        %         end
+    Current_state_index = 1;    n = 1;     t = 0;
+    while ~isempty(Current_state_index) && t <= Final_time        
         %% Saving data for analysis
-        State_Index(i) = Current_state_index;
-        Time(i) = t;
+        State_Index(n) = Current_state_index;
+        Time(n) = t;
+        
         %% Updating the system
-        i = i+1;
+        n = n+1;
         % Next state's index
         Current_state_index = State_Transition_Index_Matrix(Current_state_index,...
-            find(Propensity_CDF_Normalized(Current_state_index,:) >= Rand_numbers(i,1),1));
+            find(Propensity_CDF_Normalized(Current_state_index,:) >= rand,1));
         % Updating time
-        t = t + 1/Propensity_CDF(Current_state_index,end)*log(1/Rand_numbers(i,2));
+        t = t + 1/Propensity_CDF(Current_state_index,end)*log(1/rand);
+        
     end
     % Remove the extra preallocated area
-    Time(i:end)=[];
-    State_Index(i:end)=[];
+    Time(n:end)=[];
+    State_Index(n:end)=[];
+
     % Identify the states from the index
-    State = S(State_Index,:);
+    State = State_Space(State_Index,:);
     
     % Keep data for analysis (seperate different sample paths with NaN)
     Time_Full = cat(1,[Time_Full;nan],Time);
-    State_Full = cat(1,[State_Full;nan*ones(1,size(S,2))],State);
-    
+    State_Full = cat(1,[State_Full;nan*ones(1,size(State_Space,2))],State);
+
     TotalTime = TotalTime + toc;
     fprintf('A sample path is generated in %.2f seconds\n',toc)
 end
 fprintf('SSA generated %.0f sample paths in %.2f seconds\n',Number_of_Sample_paths,TotalTime)
 
-clear Rand_numbers State_Index Time State
+clearvars Rand_numbers State_Index Time State
 
 %% Plotting
 figure(1)
