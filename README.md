@@ -1,4 +1,4 @@
-# Gillespie's Stochastic Simulation ALgorithm using Chemical Master Equation
+# Gillespie's Stochastic Simulation Algorithm using Chemical Master Equation
 
 ## Step 0: Download dependencies:\
 Direct download link for CME codes: https://github.com/midhunks/Chemical-Master-Equation
